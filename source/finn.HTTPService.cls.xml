@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.1 (Build 608U)" ts="2014-07-09 09:38:31">
+<Class name="finn.HTTPService">
+<Super>Ens.BusinessService</Super>
+<TimeChanged>63377,34614.488861</TimeChanged>
+<TimeCreated>63377,34614.488861</TimeCreated>
+
+<Parameter name="ADAPTER">
+<Default>EnsLib.HTTP.InboundAdapter</Default>
+</Parameter>
+
+<Parameter name="SETTINGS">
+<Default>TargetConfigNames</Default>
+</Parameter>
+
+<Method name="OnProcessInput">
+<FormalSpec>pInput:%Stream.Object,*pOutput:%Stream.Object</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	try {
+		set pOutput = ##class(%Library.GlobalCharacterStream).%New()
+		set httpVerb=pInput.Attributes("HttpRequest")
+		set streamContainer = ##class(Ens.StreamContainer).%New()
+		do streamContainer.SetAttributes(pInput.Attributes)
+		do streamContainer.StreamSet(pInput)
+		for i=1:1:$length(..TargetConfigNames,",") {
+			set target = $piece(..TargetConfigNames,",")
+			do ..SendRequestAsync(target,streamContainer)
+		}
+	/*
+	// On a POST you can access the request body like this
+	if ( httpVerb="POST" ) {
+		set contentLength=pInput.Attributes("content-length")
+		do pOutput.WriteLine("Content-Type="_pInput.Attributes("content-type")_" length="_contentLength_"<br/>")
+		do pInput.Rewind()
+		do pOutput.WriteLine("-------------------- post content --------------------")
+		while ( 'pInput.AtEnd ) {
+			do pOutput.Write( pInput.Read() )
+		}
+		do pOutput.Write("-------------------- end  content --------------------")
+		do pOutput.WriteLine()
+	}
+	*/
+	} catch error {
+		do pOutput.Write(error)
+	}
+	Quit $$$ERROR($$$NotImplemented)
+]]></Implementation>
+</Method>
+</Class>
+</Export>

@@ -1,0 +1,301 @@
+Manifest-Version: 1.0
+Created-By: mm's computing 2007
+
+Name: uk/co/mmscomputing/device/twain/TwainTransfer$NativeTransfer.cla
+ ss
+SHA1-Digest: Bv3WAfLYhmSAZgji4dnH5Z5iEOY=
+
+Name: uk/co/mmscomputing/device/twain/TwainScanner.class
+SHA1-Digest: Wixrdl9fAeAz3LGciAN0MXfBCdk=
+
+Name: uk/co/mmscomputing/images/icons/32x32/list.png
+SHA1-Digest: wvj29RdfASD+rOem8gsGDqtcVYo=
+
+Name: uk/co/mmscomputing/device/twain/TwainNativeLoadStrategySingleton
+ $TwainNativeLoadStrategyInstance.class
+SHA1-Digest: lI0PsDSFF8x9Xfhr6hOWqBJR3Uk=
+
+Name: uk/co/mmscomputing/device/twain/TwainCapability$ImageFileFormat.
+ class
+SHA1-Digest: kxAKbPhb84Z63qgxiqDot6NCzuM=
+
+Name: uk/co/mmscomputing/device/scanner/ScannerIOMetadata.class
+SHA1-Digest: a9yc9xsaNHO+8sGSs5A1MrjR4mM=
+
+Name: uk/co/mmscomputing/device/twain/TwainNativeLoadStrategySingleton
+ .class
+SHA1-Digest: a2rEBx6MdAll/R+iGMSsxm4V7MQ=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$NotDSEvent.
+ class
+SHA1-Digest: PBPc7EKfSYh1Fa8tMKJuuUgt6Xg=
+
+Name: uk/co/mmscomputing/concurrent/Timer$CountdownThread.class
+SHA1-Digest: VoH5YUDGY2I3V3MlbHviSgdH7e0=
+
+Name: uk/co/mmscomputing/device/twain/TwainTransfer$FileTransfer.class
+SHA1-Digest: GjoDEJRGsExxB7n+JbLFxwgaP6o=
+
+Name: uk/co/mmscomputing/device/scanner/Scanner.class
+SHA1-Digest: QWD7Ka0p84SFQKw0h0+qGSHSyWU=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$CheckStatus
+ .class
+SHA1-Digest: //Un1AlCHmCH7SDiMPsV5qeIHhg=
+
+Name: uk/co/mmscomputing/util/configuration/ConfigurationReader.class
+SHA1-Digest: bvl2+uELAJSyxqE5/pY8OMULii4=
+
+Name: uk/co/mmscomputing/device/twain/TwainArray.class
+SHA1-Digest: KWSFGRoXgpsXkXVAOCa0uvIbK0I=
+
+Name: uk/co/mmscomputing/util/JarFile.class
+SHA1-Digest: SfyoTP8j4ktRVBYu+bWgzsLywp4=
+
+Name: uk/co/mmscomputing/device/twain/TwainCapability.class
+SHA1-Digest: BpuxxAaf24pd1VZKYqYfaF8ZURU=
+
+Name: uk/co/mmscomputing/device/twain/TwainTransfer.class
+SHA1-Digest: BXfY8HGVzqeNRbc8VLTa3ep6C/4=
+
+Name: uk/co/mmscomputing/util/configuration/Parser.class
+SHA1-Digest: Oomw/rRWq9kLknoVkZqxzPb5sEU=
+
+Name: uk/co/mmscomputing/device/twain/TwainFailureException$BadCap.cla
+ ss
+SHA1-Digest: 8+Uzl04ObJQVPAt8SXX15kF6/9s=
+
+Name: uk/co/mmscomputing/util/UtilClassLoader.class
+SHA1-Digest: dAvKlET2GUMXFBNICumanZg3d5w=
+
+Name: uk/co/mmscomputing/device/twain/TwainTransfer$MemoryTransfer$Inf
+ o.class
+SHA1-Digest: WTAwn8d3VkQiaAORWK7Hiia6XYI=
+
+Name: uk/co/mmscomputing/concurrent/ArrayBlockingQueue.class
+SHA1-Digest: LnbfkIfyq1CZT1JkWLRORyg/qB4=
+
+Name: uk/co/mmscomputing/util/JarLib.class
+SHA1-Digest: eyzgiTAmYzQK03s7JSwHnxpzKR8=
+
+Name: uk/co/mmscomputing/device/scanner/ScannerDevice.class
+SHA1-Digest: QZWxHXrnfIS2Iyerk9Z/BadJiOo=
+
+Name: uk/co/mmscomputing/concurrent/Semaphore.class
+SHA1-Digest: DyE4ywc1nsyrRP83TKkEikEp9OY=
+
+Name: uk/co/mmscomputing/device/twain/win32/jtwain.dll
+SHA1-Digest: lYFUbBvrMPcgxMc46LcANq/1r1I=
+
+Name: uk/co/mmscomputing/images/icons/16x16/scanner.png
+SHA1-Digest: g/QDh610nntuHcX6U8MsLnGho48=
+
+Name: uk/co/mmscomputing/concurrent/TimerListener.class
+SHA1-Digest: z11Y32uPwj14o9HBONtmy9cWQFg=
+
+Name: uk/co/mmscomputing/util/UtilMainApp$2.class
+SHA1-Digest: 2l5B4cmVCO0nBYn5cV6GOkDghqE=
+
+Name: uk/co/mmscomputing/device/scanner/ScannerListener.class
+SHA1-Digest: Bd5CtvNFkJskSqAOyM+aaffJvpk=
+
+Name: uk/co/mmscomputing/images/icons/32x32/scanner.png
+SHA1-Digest: 9dn94jNKfA2gPEkPUFAwYwgC8bg=
+
+Name: uk/co/mmscomputing/util/jnative.class
+SHA1-Digest: tWnYfCd5+cbXwfMDnHF51BtEe4c=
+
+Name: uk/co/mmscomputing/device/twain/TwainITransfer.class
+SHA1-Digest: NWRMTQ+YjLmLMcigov4JCESLStU=
+
+Name: uk/co/mmscomputing/device/twain/TwainUserCancelException.class
+SHA1-Digest: TvRLuhVF47OW13jJRt0sRuUFZic=
+
+Name: uk/co/mmscomputing/util/JarImageIcon.class
+SHA1-Digest: QJaC+GBvq4uiBOOEEIvM0z0b62w=
+
+Name: uk/co/mmscomputing/concurrent/BufferBlockingQueue.class
+SHA1-Digest: klU1qP0/eqpwNjtdRWZIeKTY8HU=
+
+Name: uk/co/mmscomputing/device/twain/TwainException.class
+SHA1-Digest: QYETHTO01BgAp2jFd7PQwMnx9M4=
+
+Name: uk/co/mmscomputing/util/UtilMainApp$1.class
+SHA1-Digest: dwg1FGRImd0aG/LyIpqBvLk5t7M=
+
+Name: uk/co/mmscomputing/device/twain/TwainEnumeration.class
+SHA1-Digest: Myu7XAvLbK50eWFVt3Nq4yad6oE=
+
+Name: uk/co/mmscomputing/device/twain/TwainFileSystem.class
+SHA1-Digest: l7weaFVCsfBgfljR0wy0waqw0UQ=
+
+Name: uk/co/mmscomputing/device/twain/TwainITransferFactory.class
+SHA1-Digest: hXGWsEnxEEApFQmPzly+N8BSXHA=
+
+Name: uk/co/mmscomputing/util/UtilMainApp.class
+SHA1-Digest: 2s0D6GmZ9k0ZSRkVhNzZVY3jITE=
+
+Name: uk/co/mmscomputing/util/metadata/Metadata.class
+SHA1-Digest: Cjs5/IX7gjhRm09WhwAkC3KewTQ=
+
+Name: uk/co/mmscomputing/device/twain/TwainRange.class
+SHA1-Digest: RgoNt2BNyndrtegdf1oIfb1DC+0=
+
+Name: uk/co/mmscomputing/device/twain/TwainINativeLoadStrategy.class
+SHA1-Digest: DdzFIY+QxycgZGetcENmNlrD0fI=
+
+Name: uk/co/mmscomputing/device/scanner/ScannerIOException.class
+SHA1-Digest: 95y6u7z6ttwxe5t8d5rh8T9z40Q=
+
+Name: uk/co/mmscomputing/device/twain/TwainFailureException$CapUnsuppo
+ rted.class
+SHA1-Digest: pl55WvoiccNPgnFwG+CnJxweHSg=
+
+Name: uk/co/mmscomputing/device/twain/TwainIdentity.class
+SHA1-Digest: g81TeVunb/6zk/tumfRLaGoZw0w=
+
+Name: uk/co/mmscomputing/device/twain/TwainSource.class
+SHA1-Digest: 6wsr1cz1spVJoxmXAZBAdXpZzX0=
+
+Name: uk/co/mmscomputing/device/twain/TwainFailureException.class
+SHA1-Digest: vCXd65V/FM+FugtILQ7uiRwVH54=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException.class
+SHA1-Digest: 3/uiCwuBzPcrZq0z96FkVr7NbPg=
+
+Name: uk/co/mmscomputing/device/twain/TwainDefaultTransferFactory.clas
+ s
+SHA1-Digest: TaB1Rwn4cn1qLC18O4Kqht6jGow=
+
+Name: uk/co/mmscomputing/device/twain/TwainExtImageInfo.class
+SHA1-Digest: hPd+FjkffjQB3T2G4WsEvYrmEio=
+
+Name: uk/co/mmscomputing/device/twain/win64/jtwain.dll
+SHA1-Digest: 2TRHOKT+Z8jjVclFZdxznUyBlkg=
+
+Name: uk/co/mmscomputing/device/twain/TwainDefaultNativeLoadStrategy.c
+ lass
+SHA1-Digest: JqpKxL15Xi1uL/lf0YmkYSayXms=
+
+Name: uk/co/mmscomputing/device/twain/jtwain.class
+SHA1-Digest: g540NfP4YOJVfLzlQ2O2xnmm5uo=
+
+Name: uk/co/mmscomputing/device/twain/TwainIOMetadata.class
+SHA1-Digest: rK/ESfb/UyJyzVQbSpw556TKV6Q=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$TransferDon
+ e.class
+SHA1-Digest: DnzG4knKgDsraiBldqbNleSSjiM=
+
+Name: uk/co/mmscomputing/device/twain/TwainCapability$Compression.clas
+ s
+SHA1-Digest: Z5BPRKCjrDJIIl4lte93lo4bCF8=
+
+Name: uk/co/mmscomputing/util/UtilTabCloseIcon.class
+SHA1-Digest: Ctrveb0pnQRQqZZXmJuQheXgD48=
+
+Name: uk/co/mmscomputing/device/twain/TwainExample.class
+SHA1-Digest: uOzYKGIvGCjdYfv2TuLo0SZw240=
+
+Name: uk/co/mmscomputing/device/twain/TwainIOException.class
+SHA1-Digest: iDMPnP8pVFEU+TKUzarmVgJcdbg=
+
+Name: uk/co/mmscomputing/device/twain/TwainPanel.class
+SHA1-Digest: e4zYm3jl8c5WNEQqK2GW7lSZ/ek=
+
+Name: uk/co/mmscomputing/util/configuration/ConfigurationMap.class
+SHA1-Digest: 6iudIVdhU45L3oHV/+NhkLyFmkQ=
+
+Name: uk/co/mmscomputing/imageio/bmp/BMPConstants.class
+SHA1-Digest: Yx6QCFW/UIT/h1PEtvjnOaubBM0=
+
+Name: uk/co/mmscomputing/device/twain/TwainTransfer$MemoryTransfer.cla
+ ss
+SHA1-Digest: c2FNOPkV0oyaP4nGxAUoFiatWi0=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$DSEvent.cla
+ ss
+SHA1-Digest: UNX0cyHwclANA/M9+dVKi8zpT8A=
+
+Name: uk/co/mmscomputing/device/twain/TwainContainer.class
+SHA1-Digest: LzIdTHRUOpaSwyZKLjQNV/CcgWE=
+
+Name: uk/co/mmscomputing/device/twain/TwainImageInfo.class
+SHA1-Digest: HD3F1mgT6YvHBlVWHYGYtT+bZ/U=
+
+Name: uk/co/mmscomputing/util/UtilResources.class
+SHA1-Digest: UU2TyJMhICZEu8sRigAMXDRsn/8=
+
+Name: uk/co/mmscomputing/device/twain/TwainCapability$XferMech.class
+SHA1-Digest: 6Rf0WLdSV7GR466wzavE6K25aqo=
+
+Name: uk/co/mmscomputing/device/twain/TwainOneValue.class
+SHA1-Digest: X2QEaZg3EPl/BLIWIIfvQAy20Vc=
+
+Name: uk/co/mmscomputing/concurrent/TimeUnit.class
+SHA1-Digest: cQedHvNB9+bWkD7h02Ui0rDvxNA=
+
+Name: uk/co/mmscomputing/util/configuration/ConfigurationWriter.class
+SHA1-Digest: RRskzHhit9XkIhXxYhSEF9kT/jk=
+
+Name: uk/co/mmscomputing/util/UtilTabCloseIcon$1.class
+SHA1-Digest: qfVYdqE7m19x/qiTMVs858y7STw=
+
+Name: uk/co/mmscomputing/device/twain/jtwain$1.class
+SHA1-Digest: MU7vros/eIA/STUl79UVfHuBnJM=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$EndOfList.c
+ lass
+SHA1-Digest: rE8zm3p8yTDIcYGkAshzXXCS2JA=
+
+Name: uk/co/mmscomputing/concurrent/Blocker.class
+SHA1-Digest: JUIkQSvroyGmfsAYYFlpq+szSGw=
+
+Name: uk/co/mmscomputing/device/twain/TwainBufferedImage.class
+SHA1-Digest: tdGHU4km0+lpl8I8eOqo82clPxE=
+
+Name: uk/co/mmscomputing/device/scanner/ScannerIOMetadata$Type.class
+SHA1-Digest: 3ZQpQTdnahAURdPiur5k8ZIfcuU=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$Cancel.clas
+ s
+SHA1-Digest: 3kYxrPzbcuXHxNpAiEZIQrg0Ym8=
+
+Name: uk/co/mmscomputing/util/metadata/MetadataListener.class
+SHA1-Digest: Lht4scCSdTFlTfyL7GbeRNK5ndc=
+
+Name: uk/co/mmscomputing/concurrent/SignalBlockingQueue.class
+SHA1-Digest: bl7vJo3Ft2Cwb0IGsIzPjEv5YaE=
+
+Name: uk/co/mmscomputing/util/UtilTextField.class
+SHA1-Digest: DBu9PNnc18p5JBldpdtihj3B2oc=
+
+Name: uk/co/mmscomputing/util/JarInputStream.class
+SHA1-Digest: DADfhANn/X9me9EpqLKTKHKgzMw=
+
+Name: uk/co/mmscomputing/imageio/bmp/BMPMetadata.class
+SHA1-Digest: FiLmhzFq7Is6msEq1Uus7VrF4OA=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$InfoNotSupp
+ orted.class
+SHA1-Digest: kZSSMhDAOSoqmEw61NPUj7kO+J4=
+
+Name: uk/co/mmscomputing/device/twain/ADFTwainExample.class
+SHA1-Digest: /WA8qqL5lF55hPHUEjXXN0Vtdv4=
+
+Name: uk/co/mmscomputing/concurrent/Timer.class
+SHA1-Digest: ttO5NkBwAE5bV8KH/08NzrsJ1DI=
+
+Name: uk/co/mmscomputing/device/twain/TwainImageLayout.class
+SHA1-Digest: MP0U0AqSnwc1cl6DHYFA2nrLa6k=
+
+Name: uk/co/mmscomputing/device/twain/TwainConstants.class
+SHA1-Digest: pXHWjE3lkgm53JBJJIZcdbFfdQc=
+
+Name: uk/co/mmscomputing/device/twain/TwainResultException$DataNotAvai
+ lable.class
+SHA1-Digest: 62cejqoalgX4B9bOjijLVKWugx8=
+
+Name: uk/co/mmscomputing/device/twain/TwainSourceManager.class
+SHA1-Digest: eHiEvMWZR/1xQ07ZiifwH26sDVM=
+
