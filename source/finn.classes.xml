@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.1 (Build 608U)" ts="2014-07-14 12:09:38">
+<Class name="finn.DeviceEndpoint">
+<Description>
+Storage for device info metadata</Description>
+<IncludeCode>Ensemble</IncludeCode>
+<Super>%Persistent,%XML.Adaptor</Super>
+<TimeChanged>63382,32524.131739</TimeChanged>
+<TimeCreated>63382,30023.103145</TimeCreated>
+
+<Property name="Location">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Property Info As %String [ MultiDimensional ];
+
+]]></Content>
+</UDLText>
+
+<Property name="Names">
+<Type>%ListOfDataTypes</Type>
+</Property>
+
+<Property name="Values">
+<Type>%ListOfDataTypes</Type>
+</Property>
+
+<Property name="Created">
+<Type>%TimeStamp</Type>
+<InitialExpression>$$$timeUTC</InitialExpression>
+<ReadOnly>1</ReadOnly>
+</Property>
+
+<Method name="fromJsonResponse">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>location:%String,json:finn.jsonResponse</FormalSpec>
+<ReturnType>finn.DeviceEndpoint</ReturnType>
+<Implementation><![CDATA[
+	set de = ..%New()
+	set de.Location = location
+	set de.Names = json.Names.%ConstructClone()
+	set de.Values = json.Values.%ConstructClone()
+	$$$THROWONERROR(sc,de.%Save())
+	return de
+]]></Implementation>
+</Method>
+
+<Index name="LocationIndex">
+<Properties>Location</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^finn.DeviceEndpointD</DataLocation>
+<DefaultData>DeviceEndpointDefaultData</DefaultData>
+<IdLocation>^finn.DeviceEndpointD</IdLocation>
+<IndexLocation>^finn.DeviceEndpointI</IndexLocation>
+<StreamLocation>^finn.DeviceEndpointS</StreamLocation>
+<ExtentSize>100000</ExtentSize>
+<Data name="DeviceEndpointDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Location</Value>
+</Value>
+<Value name="3">
+<Value>Created</Value>
+</Value>
+<Value name="4">
+<Value>Names</Value>
+</Value>
+<Value name="5">
+<Value>Values</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="finn.Devices">
+<Description>
+User facing page to display known devices and status'</Description>
+<Super>%CSP.Page</Super>
+<TimeChanged>63382,41686.231333</TimeChanged>
+<TimeCreated>63382,35531.593608</TimeCreated>
+
+<Method name="OnPage">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&html< <!DOCTYPE html>
+<head>
+	<title>finn</title>
+	<style>
+		body { font-family:consolas }
+	</style>
+</head>
+<body>
+	>
+	set prodName=##class(Ens.Director).GetActiveProductionName()
+	&html< Active Production: #(prodName)# <br/> >
+	&html< Running = #( ##class(Ens.Director).IsProductionRunning() )# >
+	set rs=##class(%ResultSet).%New()
+	set sc=rs.Prepare("select ID from finn.DeviceEndpoint")
+	set sc=rs.Execute()
+	while ( rs.Next() ) {
+		set id=rs.Get("ID")
+		set device=##class(finn.DeviceEndpoint).%OpenId( id )
+		//zw device
+		&html< <h3>#(device.Location)#</h3> Created: #(device.Created)# <br/> >
+		&html< <table><tr><th>Property</th><th>Value</th></tr> >
+		for i=1:1:device.Names.Count() {
+			&html< <tr><td>#(device.Names.GetAt(i))#</td><td>#(device.Values.GetAt(i))#</td></tr> >
+		}
+		&html< </table> >
+	}
+	&html<
+	
+	</body>
+</html>>
+	Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="finn.RemoteFinnOperation">
+<Super>Ens.BusinessOperation</Super>
+<TimeChanged>63382,31482.533712</TimeChanged>
+<TimeCreated>63379,55283.598127</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Parameter ADAPTER = "EnsLib.HTTP.OutboundAdapter";
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Property Adapter As EnsLib.HTTP.OutboundAdapter;
+
+]]></Content>
+</UDLText>
+
+<Parameter name="INVOCATION">
+<Default>InProc</Default>
+</Parameter>
+
+<Method name="Configure">
+<Description>
+Send in a location - this will GET the finn.json
+And store the meta-data about this finn instance
+Then it will issue configuration commands to setup that finn to send
+to this HS</Description>
+<FormalSpec>request:Ens.StringContainer,*response:Ens.Response</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set httpReq = ##class(%Net.HttpRequest).%New()
+	do ##class(%Net.URLParser).Parse(request.StringValue,.url)
+	zw url
+	set httpReq.Server=url("host")
+	set httpReq.Port=url("port")
+	do httpReq.SetHeader("x-finn-auth","hello")
+	do httpReq.SetHeader("x-finn-apikey","hello")
+	do httpReq.Get( url("path"))
+	write "Got response size=",httpReq.HttpResponse.ContentLength,!
+	while (' httpReq.HttpResponse.Data.AtEnd ) {
+		write httpReq.HttpResponse.Data.ReadLine()
+		write "________________",!
+	}
+	set proxy=..streamToProxy( httpReq.HttpResponse.Data)
+	zw proxy
+	set response=##class(finn.jsonResponse).fromZENProxy( proxy )
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="finnResponseUnwrapper">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>stream:%Stream.Object</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	set content = ""
+	do stream.Rewind()
+	while ( ' stream.AtEnd ) {
+		set content = content _ stream.Read()
+	}
+	do stream.Rewind()
+	return $piece($piece(content,"<finn>",2),"</finn>",1)
+]]></Implementation>
+</Method>
+
+<Method name="streamToProxy">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>stream:%Stream.Object</FormalSpec>
+<ReturnType>%ZEN.proxyObject</ReturnType>
+<Implementation><![CDATA[
+	set content = ..finnResponseUnwrapper(stream)
+	set sc=##class(%ZEN.Auxiliary.jsonProvider).%ConvertJSONToObject(content,,.proxy)
+	return proxy
+]]></Implementation>
+</Method>
+
+<Method name="test">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[
+	set operation = ##class(finn.RemoteFinnOperation).%New("test")
+	set request=##class(Ens.StringContainer).%New()
+	set request.StringValue="http://192.168.1.101:8080/finn"
+	set status = operation.Configure(request,.response)
+	write "response",!,"-----------",!
+	write response.toString(),!
+	zw response
+]]></Implementation>
+</Method>
+
+<XData name="MessageMap">
+<Data><![CDATA[
+<MapItems>
+	<MapItem MessageType="Ens.StringRequest">
+	<Method>Configure</Method>
+	</MapItem>
+</MapItems>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="finn.Request">
+<Super>Ens.Request</Super>
+<TimeChanged>63379,55559.887328</TimeChanged>
+<TimeCreated>63379,55557.249739</TimeCreated>
+
+<Property name="Location">
+<Type>%String</Type>
+</Property>
+
+<Property name="Method">
+<Type>%String</Type>
+</Property>
+
+<Property name="Args">
+<Type>%ListOfDataTypes</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DefaultData>RequestDefaultData</DefaultData>
+<Data name="RequestDefaultData">
+<Structure>listnode</Structure>
+<Subscript>"Request"</Subscript>
+<Value name="1">
+<Value>Location</Value>
+</Value>
+<Value name="2">
+<Value>Method</Value>
+</Value>
+<Value name="3">
+<Value>Args</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="finn.UPNPDiscoveryOperation">
+<Description>
+Starts a java process to monitor for UPNP devices</Description>
+<Super>EnsLib.JavaGateway.AbstractOperation</Super>
+<TimeChanged>63379,42655.030449</TimeChanged>
+<TimeCreated>63378,34519.783753</TimeCreated>
+
+<Method name="OnInit">
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	#dim error as %Exception.AbstractException
+	do ##super()
+	// get a connection and start the discovery
+	try {
+		$$$THROWONERROR(sc,..GetConnection(.javaGateway))
+		set finn=##class(finn.Finn).getFinn(javaGateway)
+		do finn.setDebug(1)
+		set upnpSearcher=##class(finn.UPNPSearcher).%New(javaGateway)
+		set sink=##class(finn.UPNPHttpSink).%New(javaGateway)
+		do sink.setProperty("port","9981")
+		$$$TRACE("sink="+sink)
+		do upnpSearcher.addSink(sink)
+		do upnpSearcher.search()
+		// just kick off search - add a sink which POSTS NOTIFY messages
+		// back into this production!!!
+		$$$TRACE("Called search()")
+	
+	} catch error {
+		$$$TRACE(error)
+		return error.AsStatus()
+	}
+	return $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="finn.UPNPProcess">
+<Description>
+Detects UPNP finn devices and configures them</Description>
+<Super>Ens.BusinessProcessBPL</Super>
+<TimeChanged>63382,32002.559532</TimeChanged>
+<TimeCreated>63379,40822.365724</TimeCreated>
+
+<XData name="BPL">
+<Description>
+BPL Definition</Description>
+<XMLNamespace>http://www.intersystems.com/bpl</XMLNamespace>
+<Data><![CDATA[
+<process language='objectscript' request='EnsLib.HTTP.GenericMessage' response='Ens.Response' height='2000' width='2000' >
+<context>
+<property name='headers' type='%String' collection='array' instantiate='0' >
+</property>
+<property name='location' type='%String' instantiate='0' >
+</property>
+<property name='finnInfo' type='finn.jsonResponse' instantiate='1' >
+</property>
+</context>
+<sequence xend='200' yend='1100' >
+<if name='Notify from a finn' condition='##class(finn.Utilities).isNotifyFromFinn(request)' xpos='200' ypos='250' xend='200' yend='1000' >
+<true>
+<trace name='FROM FINN' value='"FROM FINN!"' xpos='470' ypos='400' />
+<assign name="Get location" property="context.location" value="##class(finn.Utilities).getLocation(request)" action="set" xpos='470' ypos='500' />
+<trace name='location' value='"context.location="_context.location' xpos='470' ypos='600' />
+<call name='Get device info' target='finn.RemoteFinnOperation' async='0' xpos='470' ypos='700' >
+<request type='Ens.StringRequest' >
+<assign property="callrequest.StringValue" value="context.location" action="set" />
+</request>
+<response type='finn.jsonResponse' >
+<assign property="context.finnInfo" value="callresponse" action="set" />
+</response>
+</call>
+<trace name='finnInfo' value='"context.finnInfo.toString()="_context.finnInfo.toString()' xpos='470' ypos='800' />
+<code name='Save device endpoint' xpos='470' ypos='900' >
+<![CDATA[ do ##class(finn.DeviceEndpoint).fromJsonResponse(context.location,context.finnInfo)
+ ]]]]><![CDATA[>
+</code>
+</true>
+<false>
+<trace name='NOT FROM FINN' value='"NOT FROM FINN"' xpos='200' ypos='400' />
+</false>
+</if>
+</sequence>
+</process>
+]]></Data>
+</XData>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+</Storage>
+</Class>
+
+
+<Class name="finn.Utilities">
+<IncludeCode>Ensemble</IncludeCode>
+<Super>%RegisteredObject</Super>
+<TimeChanged>63382,43775.625296</TimeChanged>
+<TimeCreated>63379,40140.768336</TimeCreated>
+
+<Method name="parseNotify">
+<Description>
+Given a UPNP "NOTIFY" HTTP message parse out the headers and
+return in a name/value array</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>httpMsg:EnsLib.HTTP.GenericMessage,*headers</FormalSpec>
+<Implementation><![CDATA[
+	do httpMsg.Stream.Rewind()
+	set httpMsg.Stream.LineTerminator = $c(10)
+	while ( 'httpMsg.Stream.AtEnd ) {
+		set line=httpMsg.Stream.ReadLine()
+		if ( $length(line,":") <= 1 ) {
+			continue
+		}
+		set name=$piece(line,":",1),value=$piece(line,":",2,*)
+		// Normalize the names
+		set value=$zstrip(value,"<W")
+		set name=$zstrip($zconvert(name,"l"),"*W")
+		$$$TRACE(name_"="_value)
+		set headers(name)=value
+	}
+]]></Implementation>
+</Method>
+
+<Method name="isNotifyFromFinn">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>httpMsg:EnsLib.HTTP.GenericMessage,*headers</FormalSpec>
+<ReturnType>%Boolean</ReturnType>
+<Implementation><![CDATA[
+	do ..parseNotify(httpMsg,.headers)
+	if ( $data(headers("location") )) {
+		if ( headers("location")["finn" ) {
+			return 1
+		}
+	}
+	return 0
+]]></Implementation>
+</Method>
+
+<Method name="getLocation">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>httpMsg:EnsLib.HTTP.GenericMessage</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	if ( ..isNotifyFromFinn(httpMsg,.headers) ) {
+		return $get(headers("location"),"" )
+	} else {
+		return ""
+	}
+]]></Implementation>
+</Method>
+
+<Method name="export">
+<Description>
+Export all the finn stuff to a folder</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>directory:%String</FormalSpec>
+<Implementation><![CDATA[
+	set items("finn.Utilities.cls")=""
+	set items("finn.UPNPProcess.cls")=""
+	set items("finn.UPNPDiscoveryOperation.cls")=""
+	
+	set items("finn.Request.cls")=""
+	set items("finn.RemoteFinnOperation.cls")=""
+	set items("finn.jsonResponse.cls")=""
+	set items("finn.Devices.cls")=""
+	set items("finn.DeviceEndpoint.cls")=""
+
+	// TODO - add a production -
+	
+	
+	set file="finn.classes.xml"
+	do $system.OBJ.Export( .items, directory_file )
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="finn.jsonResponse">
+<Super>Ens.Response</Super>
+<TimeChanged>63382,31448.58351</TimeChanged>
+<TimeCreated>63382,27626.26281</TimeCreated>
+
+<Property name="Names">
+<Type>%ListOfDataTypes</Type>
+</Property>
+
+<Property name="Values">
+<Type>%ListOfDataTypes</Type>
+</Property>
+
+<Method name="toString">
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	set s=$listbuild()
+	for i=1:1:..Names.Count() {
+		set name=..Names.GetAt(i)
+		set value = ..Values.GetAt(i)
+		set $list(s,i)=name_"="_value
+	}
+	return $listtostring(s)
+]]></Implementation>
+</Method>
+
+<Method name="fromZENProxy">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>proxy:%ZEN.proxyObject</FormalSpec>
+<ReturnType>finn.jsonResponse</ReturnType>
+<Implementation><![CDATA[
+	Set fr = ..%New()
+	do proxy.%CopyToArray(.data)
+	set name=$order(data(""))
+	while ( name '= "" ) {
+		do fr.Names.Insert(name)
+		do fr.Values.Insert( data(name) )
+		set name=$order(data(name))
+	}
+	return fr
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DefaultData>jsonResponseDefaultData</DefaultData>
+<Data name="jsonResponseDefaultData">
+<Subscript>"jsonResponse"</Subscript>
+<Value name="1">
+<Value>Names</Value>
+</Value>
+<Value name="2">
+<Value>Values</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>
